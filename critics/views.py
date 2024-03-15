@@ -12,6 +12,9 @@ def createc(request):
                 c = Critic.objects.create(
                     title = form.cleaned_data['title'],
                     text = form.cleaned_data['text'],
+                    movie_title = form.cleaned_data['movie_title'],
+                    creator_first_name = form.cleaned_data['creator_first_name'],
+                    creator_last_name = form.cleaned_data['creator_last_name'],
                     creator = user
                 )
                 return redirect('read', id=c.id)
@@ -31,12 +34,12 @@ def listc(request):
     return render (request, 'list.html', {'objs' :cqs})
 
 def deletec(request, id):
-    c = Critic.objects.get (id=id)
+    c = Critic.objects.get(id=id)
     if request.user.id == c.creator.id:
         c.delete()
         return redirect('create')
 
-def signup(request):
+def usersignup(request):
     if request.user.is_authenticated:
         return redirect ('logout')
     else:
@@ -49,13 +52,13 @@ def signup(request):
                     password = form.cleaned_data['password'],
                 )
                 login(request, user)
-                return redirect('list')
+                return redirect('login')
             else:
                 return render(request, 'create.html', {'form':form})
         else:
             return render (request, 'create.html', {'form':RegisterForm()})
 
-def login(request):
+def userlogin(request):
     if request.user.is_authenticated:
         return redirect('logout')
     else:
@@ -63,6 +66,7 @@ def login(request):
             form = LoginForm(request.POST)
             if form.is_valid():
                 user = authenticate(
+                request,
                 username = form.cleaned_data['username'],
                 password = form.cleaned_data['password'],
                 )
@@ -76,6 +80,6 @@ def login(request):
         else:
             return render (request, 'create.html', {'form':LoginForm})
 
-def logout(request):
+def userlogout(request):
     logout(request)
     return redirect ('login')

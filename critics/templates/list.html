@@ -1,5 +1,7 @@
+{% block content %}
 <ul>
-    {% for c in cqs %}
+    {% for c in objs %}
     <li> {{ c.title }} </li>
     {% endfor %}
 </ul>
+{% endblock %}
