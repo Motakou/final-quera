@@ -12,6 +12,9 @@ def createc(request):
                 c = Critic.objects.create(
                     title = form.cleaned_data['title'],
                     text = form.cleaned_data['text'],
+                    movie_title = form.cleaned_data['movie_title'],
+                    first_name = form.cleaned_data['first_name'],
+                    last_name = form.cleaned_data['last_name'],
                     creator = user
                 )
                 return redirect('read', id=c.id)
@@ -31,12 +34,12 @@ def listc(request):
     return render (request, 'list.html', {'objs' :cqs})
 
 def deletec(request, id):
-    c = Critic.objects.get (id=id)
+    c = Critic.objects.get(id=id)
     if request.user.id == c.creator.id:
         c.delete()
         return redirect('create')
 
-def signup(request):
+def usersignup(request):
     if request.user.is_authenticated:
         return redirect ('logout')
     else:
@@ -55,7 +58,7 @@ def signup(request):
         else:
             return render (request, 'create.html', {'form':RegisterForm()})
 
-def login(request):
+def userlogin(request):
     if request.user.is_authenticated:
         return redirect('logout')
     else:
@@ -76,6 +79,6 @@ def login(request):
         else:
             return render (request, 'create.html', {'form':LoginForm})
 
-def logout(request):
+def userlogout(request):
     logout(request)
     return redirect ('login')
