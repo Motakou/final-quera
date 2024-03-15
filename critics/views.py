@@ -32,7 +32,6 @@ def listc(requests):
 def deletec(request):
     pass
 
-
 def usersingup(request):
     pass
 
