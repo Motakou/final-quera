@@ -13,8 +13,8 @@ def createc(request):
                     title = form.cleaned_data['title'],
                     text = form.cleaned_data['text'],
                     movie_title = form.cleaned_data['movie_title'],
-                    first_name = form.cleaned_data['first_name'],
-                    last_name = form.cleaned_data['last_name'],
+                    creator_first_name = form.cleaned_data['creator_first_name'],
+                    creator_last_name = form.cleaned_data['creator_last_name'],
                     creator = user
                 )
                 return redirect('read', id=c.id)
@@ -52,7 +52,7 @@ def usersignup(request):
                     password = form.cleaned_data['password'],
                 )
                 login(request, user)
-                return redirect('list')
+                return redirect('login')
             else:
                 return render(request, 'create.html', {'form':form})
         else:
@@ -66,6 +66,7 @@ def userlogin(request):
             form = LoginForm(request.POST)
             if form.is_valid():
                 user = authenticate(
+                request,
                 username = form.cleaned_data['username'],
                 password = form.cleaned_data['password'],
                 )
