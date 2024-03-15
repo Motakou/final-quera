@@ -28,10 +28,8 @@ def readc(request):
 def listc(requests):
     pass
 
-
 def deletec(request):
     pass
-
 
 def usersingup(request):
     pass
