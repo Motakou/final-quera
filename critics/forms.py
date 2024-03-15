@@ -1,21 +1,17 @@
 from django import forms
-from .models import Critic,User
-
+from .models import Critic, User
 
 class CriticForm(forms.ModelForm):
     class Meta:
         model = Critic
-        fields= ["title","text"]
-
+        fields = ['title','text']
 
 class RegisterForm(forms.ModelForm):
     class Meta:
-        model=User
-        fields = ['username','email','password']
-
+        model = User
+        fields = ['username', 'email', 'password']
 
 class LoginForm(forms.ModelForm):
     class Meta:
-        model=User
-        fields=['username','password']
-        
+        model = User
+        fields = ['username', 'password']
