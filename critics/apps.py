@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CriticsConfig(AppConfig):
+class UsercriticsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'critics'
+    name = 'Usercritics'
